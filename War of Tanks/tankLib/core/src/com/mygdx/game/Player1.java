@@ -2,10 +2,10 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Player {
+public class Player1 {
 	private Vector2 position;
 	
-	public Player(int x , int y) {
+	public Player1(int x , int y) {
 		position = new Vector2(x,y);
 	}
 	
@@ -13,3 +13,4 @@ public class Player {
 		return position;
 	}
 }
+
