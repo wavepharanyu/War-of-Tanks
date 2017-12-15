@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class Box {
+public class Box2 {
 	private Vector2 position;
 	private Random ranX = new Random();
 	private Random ranY = new Random();
@@ -14,10 +14,10 @@ public class Box {
 	}
 	
 	public int ranPosY() {
-		return ranY.nextInt(312)+200;
+		return ranY.nextInt(300)+500;
 	}
 	
-	public Box() {
+	public Box2() {
 		position = new Vector2(ranPosX(),ranPosY());
 	}
 	
@@ -25,3 +25,4 @@ public class Box {
 		return position;
 	}
 }
+

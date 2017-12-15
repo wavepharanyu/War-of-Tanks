@@ -20,7 +20,9 @@ public class Bullet2 {
 	public void update() {
 		if(check == 1)
 			position.y -= 10;
-		else
-			position.x =  player2.getPosition().x;
+		else {
+			position.x =  player2.getPosition().x+50;
+			position.y =  player2.getPosition().y+90;
+		}
 	}
 }

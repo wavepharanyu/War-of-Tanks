@@ -1,5 +1,8 @@
 package com.mygdx.game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
@@ -22,21 +25,33 @@ public class GameScreen extends ScreenAdapter {
 	private int x;
 	private int y;
 	private Bullet1 bullet1;
+	private List<Bullet1> bullet1List;
 	private Bullet2 bullet2;
+	private List<Bullet2> bullet2List;
+	private Box box1;
+	private Box2 box2;
+	private boolean bullet1IsRemove = true;
+	private boolean bullet2IsRemove = true;
 	
 	public GameScreen(TankGame tankGame) {
         this.tankGame = tankGame;
         tankImg1 = new Texture("player.png");
         tankImg2 = new Texture("player2.png");
-        bulletImg1 = new Texture("pacman.png");
-        bulletImg2 = new Texture("pacman.png");
-        boxImg = new Texture("box.png");
+        bulletImg1 = new Texture("rocket.png");
+        bulletImg2 = new Texture("rocket2.png");
+        boxImg = new Texture("box2.png");
         world = new World(tankGame);
         player1 = world.getPlayer1();
         player2 = world.getPlayer2();
+        box1 = world.getBox1();
+        box2 = world.getBox2();
         background = new Texture("background.jpg");
         bullet1 = new Bullet1(player1);
         bullet2 = new Bullet2(player2);
+        bullet1List = new ArrayList();
+		bullet1List.add(bullet1);
+		bullet2List = new ArrayList();
+		bullet2List.add(bullet2);
         
     }
 	
@@ -48,12 +63,22 @@ public class GameScreen extends ScreenAdapter {
 		 SpriteBatch batch = tankGame.batch;
 	     batch.begin();
 	     batch.draw(background, 0, 0);
-	     Vector2 pos_player1 = player1.getPosition();
-	     batch.draw(tankImg1, pos_player1.x, pos_player1.y);
-	     Vector2 pos_player2 = player2.getPosition();
-	     batch.draw(tankImg2, pos_player2.x, pos_player2.y);
-	     batch.draw(bulletImg1,bullet1.getPosition().x,bullet1.getPosition().y);
-	     batch.draw(bulletImg2,bullet2.getPosition().x,bullet2.getPosition().y);
+	     Vector2 posPlayer1 = player1.getPosition();
+	     batch.draw(tankImg1, posPlayer1.x, posPlayer1.y);
+	     Vector2 posPlayer2 = player2.getPosition();
+	     Vector2 posBox1 = box1.getPosition();
+	     Vector2 posBox2 = box2.getPosition();
+	     batch.draw(tankImg2, posPlayer2.x, posPlayer2.y);
+	     for(int i = 0; i < bullet1List.size(); i++) {
+	    	if(bullet1IsRemove == false)
+	    		batch.draw(bulletImg1,bullet1List.get(i).getPosition().x,bullet1List.get(i).getPosition().y);
+	        }
+	     for(int i = 0; i < bullet2List.size(); i++) {
+	    	if(bullet2IsRemove == false)
+	    		batch.draw(bulletImg2,bullet2List.get(i).getPosition().x,bullet2List.get(i).getPosition().y);
+	        }
+	     batch.draw(boxImg,box1.getPosition().x,box1.getPosition().y);
+	     batch.draw(boxImg,box2.getPosition().x,box2.getPosition().y);
 	     batch.end();
 	 }
 	 
@@ -84,14 +109,34 @@ public class GameScreen extends ScreenAdapter {
 			 if(Gdx.input.isKeyPressed(Keys.DOWN)) {
 				 player2.move(player2.DIRECTION_DOWN);
 			 }
-			 if(Gdx.input.isKeyJustPressed(Keys.F)) {		
-				 bullet1.setCheck(1);
+			 if (bullet1IsRemove == true) {
+				 if(Gdx.input.isKeyJustPressed(Keys.F)) {		
+					 bullet1List.get(bullet1List.size()-1).setCheck(1);
+					 bullet1List.add(new Bullet1(player1));
+					 bullet1IsRemove = false;
+				 }
 			 }
-			 if(Gdx.input.isKeyJustPressed(Keys.L)) {		
-				 bullet2.setCheck(1);
+			 if (bullet1IsRemove == true) {
+				 if(Gdx.input.isKeyJustPressed(Keys.L)) {		
+					 bullet2List.get(bullet2List.size()-1).setCheck(1);
+					 bullet2List.add(new Bullet2(player2));
+				 }
 			 }
-			 bullet1.update();
-			 bullet2.update();
+			 for(int i=0;i<bullet1List.size();i++) {
+					bullet1List.get(i).update();
+					if(bullet1List.get(i).getPosition().y>1024) {
+						bullet1List.remove(i);
+						bullet1IsRemove = true;
+					}
+				}
+			 
+			 for(int i=0;i<bullet2List.size();i++) {
+					bullet2List.get(i).update();
+					if(bullet2List.get(i).getPosition().y>0) {
+						bullet2List.remove(i);
+						bullet2IsRemove = true;
+					}
+				}
 		 }
 	 }
 	

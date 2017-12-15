@@ -11,7 +11,7 @@ public class Player2 {
         {0,1},
         {-1,0}
     };
-    public static final int SPEED = 10;
+    public static final int SPEED = 5;
     public static final int DIRECTION_LEFT = 4;
     public static final int DIRECTION_UP = 3;
     public static final int DIRECTION_RIGHT = 2;
