@@ -9,6 +9,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
  
 public class GameScreen extends ScreenAdapter {
@@ -19,6 +20,7 @@ public class GameScreen extends ScreenAdapter {
 	public Texture bulletImg2;
 	public Texture background;
 	public Texture boxImg;
+	public Texture heartImg;
 	private World world;
 	private Player1 player1;
 	private Player2 player2;
@@ -30,8 +32,10 @@ public class GameScreen extends ScreenAdapter {
 	private List<Bullet2> bullet2List;
 	private Box box1;
 	private Box2 box2;
+	private Heart heart;
 	private boolean bullet1IsRemove = true;
 	private boolean bullet2IsRemove = true;
+	private int times = 0;
 	
 	public GameScreen(TankGame tankGame) {
         this.tankGame = tankGame;
@@ -40,11 +44,13 @@ public class GameScreen extends ScreenAdapter {
         bulletImg1 = new Texture("rocket.png");
         bulletImg2 = new Texture("rocket2.png");
         boxImg = new Texture("box2.png");
+        heartImg = new Texture("heart.png");
         world = new World(tankGame);
         player1 = world.getPlayer1();
         player2 = world.getPlayer2();
         box1 = world.getBox1();
         box2 = world.getBox2();
+        heart = world.getHeart();
         background = new Texture("background.jpg");
         bullet1 = new Bullet1(player1);
         bullet2 = new Bullet2(player2);
@@ -68,6 +74,7 @@ public class GameScreen extends ScreenAdapter {
 	     Vector2 posPlayer2 = player2.getPosition();
 	     Vector2 posBox1 = box1.getPosition();
 	     Vector2 posBox2 = box2.getPosition();
+	     Vector2 posHeart = heart.getPosition();
 	     batch.draw(tankImg2, posPlayer2.x, posPlayer2.y);
 	     for(int i = 0; i < bullet1List.size(); i++) {
 	    	if(bullet1IsRemove == false)
@@ -77,13 +84,17 @@ public class GameScreen extends ScreenAdapter {
 	    	if(bullet2IsRemove == false)
 	    		batch.draw(bulletImg2,bullet2List.get(i).getPosition().x,bullet2List.get(i).getPosition().y);
 	        }
-	     batch.draw(boxImg,box1.getPosition().x,box1.getPosition().y);
-	     batch.draw(boxImg,box2.getPosition().x,box2.getPosition().y);
+	     batch.draw(boxImg,posBox1.x,posBox1.y);
+	     batch.draw(boxImg,posBox2.x,posBox2.y);
+	     if(times >= 50) {
+	    	 batch.draw(heartImg,posHeart.x,posHeart.y);
+	     }
 	     batch.end();
 	 }
 	 
 	 public void update(float delta) {
 		 Vector2 pos_player1 = player1.getPosition();
+		 times += 1;
 		 if (pos_player1.x >= 0 && pos_player1.x <= 1024) {
 			 if(Gdx.input.isKeyPressed(Keys.A)) {
 				 player1.move(player1.DIRECTION_LEFT);
@@ -137,6 +148,8 @@ public class GameScreen extends ScreenAdapter {
 						bullet2IsRemove = true;
 					}
 				}
+			 if(Intersector.overlaps(player1.getRectangle(),heart.getRectangle()))
+					System.out.println("overlap");			 
 		 }
 	 }
 	

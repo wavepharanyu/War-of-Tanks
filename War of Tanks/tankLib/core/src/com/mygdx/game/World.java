@@ -1,10 +1,13 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.math.Intersector;
+
 public class World {
 	private Player1 player1;
 	private Player2 player2;
 	private Box box1;
 	private Box2 box2;
+	private Heart heart;
 	private TankGame tankGame;
 	
 	World(TankGame tankGame){
@@ -14,6 +17,7 @@ public class World {
 		player2 = new Player2(512,850);
 		box1 = new Box();
 		box2 = new Box2();
+		heart = new Heart();
 	}
 	Player1 getPlayer1() {
 		return player1;
@@ -31,4 +35,7 @@ public class World {
 		return box2;
 	}
 	
+	Heart getHeart() {
+		return heart;
+	}
 }
