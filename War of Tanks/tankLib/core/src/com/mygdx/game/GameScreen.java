@@ -9,6 +9,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
  
@@ -39,11 +40,11 @@ public class GameScreen extends ScreenAdapter {
 	
 	public GameScreen(TankGame tankGame) {
         this.tankGame = tankGame;
-        tankImg1 = new Texture("player.png");
+        tankImg1 = new Texture("player1.png");
         tankImg2 = new Texture("player2.png");
         bulletImg1 = new Texture("rocket.png");
         bulletImg2 = new Texture("rocket2.png");
-        boxImg = new Texture("box2.png");
+        boxImg = new Texture("box.png");
         heartImg = new Texture("heart.png");
         world = new World(tankGame);
         player1 = world.getPlayer1();
@@ -63,6 +64,7 @@ public class GameScreen extends ScreenAdapter {
 	
 	 @Override
 	 public void render(float delta) {
+		 ShapeRenderer shapeRenderer = tankGame.shapeRenderer;
 		 update(delta);
 		 Gdx.gl.glClearColor(0, 0, 0, 1);
 	     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -89,7 +91,14 @@ public class GameScreen extends ScreenAdapter {
 	     if(times >= 50) {
 	    	 batch.draw(heartImg,posHeart.x,posHeart.y);
 	     }
+	     shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+	     shapeRenderer.rect(heart.getRectangle().x , heart.getRectangle().y,heart.getRectangle().width,heart.getRectangle().height);
+	     shapeRenderer.rect(box1.getRectangle().x , box1.getRectangle().y,box1.getRectangle().width,box1.getRectangle().height);
+	     shapeRenderer.rect(box2.getRectangle().x , box2.getRectangle().y,box2.getRectangle().width,box2.getRectangle().height);
+	     shapeRenderer.rect(player2.getRectangle().x , player2.getRectangle().y,player2.getRectangle().width,player2.getRectangle().height);
+	     shapeRenderer.rect(player1.getRectangle().x , player1.getRectangle().y,player1.getRectangle().width,player1.getRectangle().height);
 	     batch.end();
+	     shapeRenderer.end();
 	 }
 	 
 	 public void update(float delta) {
@@ -149,7 +158,7 @@ public class GameScreen extends ScreenAdapter {
 					}
 				}
 			 if(Intersector.overlaps(player1.getRectangle(),heart.getRectangle()))
-					System.out.println("overlap");			 
+					System.out.println("overlap");		 
 		 }
 	 }
 	

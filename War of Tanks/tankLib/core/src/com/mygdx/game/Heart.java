@@ -8,24 +8,24 @@ import com.badlogic.gdx.math.Vector2;
 public class Heart {
 	private Vector2 position;
 	private Random ranX = new Random();
-	private Random ranY = new Random();
+	public int x;
+	public int y;
 	private Rectangle rectangle;
 	public int width;
     public int height;
 
-	public int ranPosX(	) {
-		return ranX.nextInt(650)+100;
+	public void ranPos() {
+		position.x = ranX.nextInt(650)+100;
+		position.y = 512;
 	}
 	
-	public int ranPosY() {
-		return ranY.nextInt(312)+200;
-	}
 	
 	public Heart() {
-		position = new Vector2(ranPosX(),ranPosY());
-		width = 70;
-        height = 70;
-		rectangle = new Rectangle(ranPosX(),ranPosY(),width,height);
+		position = new Vector2(x,y);
+		ranPos();
+		width = 65;
+        height = 65;
+		rectangle = new Rectangle(position.x,position.y,width,height);
 	}
 	
 	public Vector2 getPosition() {
@@ -35,10 +35,5 @@ public class Heart {
 	public Rectangle getRectangle() {
 	    return rectangle;
 	}
-	
-	public void move() {
-		rectangle.setPosition(position.x,position.y);
-	}
-	
 }
 

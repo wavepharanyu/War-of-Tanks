@@ -24,8 +24,8 @@ public class Player1 {
 	
 	public Player1(int x , int y) {
 		position = new Vector2(x,y);
-		 width = 150;
-	     height = 150;
+		 width = 60;
+	     height = 110;
 	     rectangle = new Rectangle(x,y,width,height);
 	}
 	
