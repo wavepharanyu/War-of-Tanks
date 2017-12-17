@@ -59,7 +59,6 @@ public class WorldRenderer {
 		SpriteBatch batch = tankGame.batch;
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 	    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-	    ShapeRenderer shapeRenderer = tankGame.shapeRenderer;
 		batch.begin();
 		if(world.gameState == 0) {
 			batch.draw(instructStateImg, 0, 0);
@@ -98,17 +97,8 @@ public class WorldRenderer {
 	    	batch.draw(lifeImg,posLife2.x,posLife2.y);
 	    	font.draw(batch, "X" + world.lifePlayer1 , 950, 50);
 	    	font.draw(batch, "X" + world.lifePlayer2 , 80, 1000);
-	     
-	    	shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-	    	shapeRenderer.rect(heart.getRectangle().x , heart.getRectangle().y,heart.getRectangle().width,heart.getRectangle().height);
-	    	shapeRenderer.rect(box1.getRectangle().x , box1.getRectangle().y,box1.getRectangle().width,box1.getRectangle().height);
-	    	shapeRenderer.rect(box2.getRectangle().x , box2.getRectangle().y,box2.getRectangle().width,box2.getRectangle().height);
-	    	shapeRenderer.rect(player2.getRectangle().x , player2.getRectangle().y,player2.getRectangle().width,player2.getRectangle().height);
-	    	shapeRenderer.rect(player1.getRectangle().x , player1.getRectangle().y,player1.getRectangle().width,player1.getRectangle().height);
-	    	shapeRenderer.rect(doubleBullet.getRectangle().x , doubleBullet.getRectangle().y,doubleBullet.getRectangle().width,doubleBullet.getRectangle().height);
-	    	shapeRenderer.rect(bullet1.getRectangle().x , bullet1.getRectangle().y,bullet1.getRectangle().width,bullet1.getRectangle().height);
-	    	shapeRenderer.rect(bullet2.getRectangle().x , bullet2.getRectangle().y,bullet2.getRectangle().width,bullet2.getRectangle().height);
 	    }
+	    
 	    if(world.gameState == 2) {
 	    	batch.draw(win1StateImg, 0, 0);
 	    }
@@ -117,7 +107,5 @@ public class WorldRenderer {
 	    	batch.draw(win2StateImg, 0, 0);
 	    }
 	    batch.end();
-	    shapeRenderer.end();
-		
 	}
 }
