@@ -25,7 +25,7 @@ public class WorldRenderer {
 	private Bullet1 bullet1;
 	private Bullet1 bullet2;
 	private Box box1;
-	private Box2 box2;
+	private Box box2;
 	private Heart heart;
 	private Fastbullet doubleBullet;
 	private BitmapFont font;

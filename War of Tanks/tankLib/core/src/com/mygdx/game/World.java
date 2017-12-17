@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import java.util.List;
+import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -13,7 +14,7 @@ public class World {
 	public Player1 player1;
 	public Player2 player2;
 	private Box box1;
-	private Box2 box2;
+	private Box box2;
 	private Heart heart;
 	private Fastbullet fastBullet;
 	private TankGame tankGame;
@@ -27,6 +28,8 @@ public class World {
 	private boolean doubleBulletIsRemove = false;
 	public Texture bulletImg1;
 	public Texture bulletImg2;
+	private Random ranX = new Random();
+	private Random ranY = new Random();
 	
 	World(TankGame tankGame){
 		this.setTankGame(tankGame);
@@ -34,8 +37,8 @@ public class World {
 		player2 = new Player2(512,850);
 		bullet1 = new Bullet1(512,-100);
 		bullet2 = new Bullet1(512,1100);
-		box1 = new Box();
-		box2 = new Box2();
+		box1 = new Box(ranX.nextInt(650)+100,ranY.nextInt(215)+210);
+		box2 = new Box(ranX.nextInt(650)+100,ranY.nextInt(145)+590);
 		heart = new Heart();
 		fastBullet = new Fastbullet();
 	}
@@ -59,7 +62,7 @@ public class World {
 		return box1;
 	}
 	
-	Box2 getBox2() {
+	Box getBox2() {
 		return box2;
 	}
 	
