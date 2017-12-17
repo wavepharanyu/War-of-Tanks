@@ -1,23 +1,14 @@
 package com.mygdx.game;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
  
 public class GameScreen extends ScreenAdapter {
 	private TankGame tankGame;
     WorldRenderer worldRenderer;
-   // private SpriteBatch batch;
     public Player1 player1;
 	public Player2 player2;
 	World world;
@@ -73,11 +64,6 @@ public class GameScreen extends ScreenAdapter {
 			if(world.gameState == 0) {
 				world.gameState = 1;
 			}
-			
-			/*if(world.gameState == 2 || world.gameState == 3) {
-				world.gameState = 1;
-				world.resetStage();	
-			}*/
 		}
 	}
 	 

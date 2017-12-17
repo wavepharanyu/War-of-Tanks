@@ -19,6 +19,8 @@ public class World {;
 	private int fastbullTimes = 0;
 	public Bullet bullet1;
 	public Bullet bullet2;
+	private Life life1;
+	private Life life2;
 	private boolean bullet1IsRemove = true;
 	private boolean bullet2IsRemove = true;
 	public boolean heartIsRemove = false;
@@ -40,22 +42,9 @@ public class World {;
 		box1 = new Box(ranX.nextInt(650)+100,ranY.nextInt(215)+210);
 		box2 = new Box(ranX.nextInt(650)+100,ranY.nextInt(145)+590);
 		heart = new Heart();
+		life1 = new Life(880,10);
+		life2 = new Life(10,950);
 		fastBullet = new Fastbullet();
-	}
-	
-	public void resetStage() {
-		player1 = new Player1(512,100);
-		player2 = new Player2(512,850);
-		bullet1 = new Bullet(512,-100);
-		bullet2 = new Bullet(512,1100);
-		box1 = new Box(ranX.nextInt(650)+100,ranY.nextInt(215)+210);
-		box2 = new Box(ranX.nextInt(650)+100,ranY.nextInt(145)+590);
-		heart = new Heart();
-		fastBullet = new Fastbullet();
-		lifePlayer1 = 3;
-		lifePlayer2 = 3;
-		bullet1.SPEED = 10;
-		bullet2.SPEED = 10;
 	}
 	
 	Player1 getPlayer1() {
@@ -88,6 +77,14 @@ public class World {;
 	
 	Fastbullet getFastbullet() {
 		return fastBullet;
+	}
+	
+	Life getLife1() {
+		return life1;
+	}
+	
+	Life getLife2() {
+		return life2;
 	}
 	
 	public void updateBullet1(float delta) {

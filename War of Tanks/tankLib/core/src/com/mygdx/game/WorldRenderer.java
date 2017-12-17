@@ -22,7 +22,8 @@ public class WorldRenderer {
 	public Texture bulletImg2;
 	public Texture boxImg;
 	public Texture heartImg;
-	public Texture doubleBulletImg;
+	public Texture fastBulletImg;
+	public Texture lifeImg;
 	private Player1 player1;
 	private Player2 player2;
 	private Bullet bullet1;
@@ -30,6 +31,8 @@ public class WorldRenderer {
 	private Box box1;
 	private Box box2;
 	private Heart heart;
+	private Life life1;
+	private Life life2;
 	private Fastbullet doubleBullet;
 	private BitmapFont font;
 	
@@ -46,7 +49,8 @@ public class WorldRenderer {
         bulletImg2 = new Texture("rocket2.png");
         boxImg = new Texture("box.png");
         heartImg = new Texture("heart.png");
-        doubleBulletImg = new Texture("fastbullet.png");
+        fastBulletImg = new Texture("fastbullet.png");
+        lifeImg = new Texture("heart.png");
         font = new BitmapFont();
     	font.getData().setScale(3);
 	}
@@ -68,6 +72,8 @@ public class WorldRenderer {
 	    doubleBullet = world.getFastbullet();
 	    bullet1 = world.getBullet1();
 	    bullet2 = world.getBullet2();
+	    life1 = world.getLife1();
+	    life2 = world.getLife2();
 		Vector2 posPlayer1 = player1.getPosition();
 		Vector2 posPlayer2 = player2.getPosition();
 		Vector2 posBullet1 = bullet1.getPosition();
@@ -76,6 +82,8 @@ public class WorldRenderer {
 	    Vector2 posBox2 = box2.getPosition();
 	    Vector2 posHeart = heart.getPosition();
 	    Vector2 posDouble = doubleBullet.getPosition();
+	    Vector2 posLife1 = life1.getPosition();
+	    Vector2 posLife2 = life2.getPosition();
 	    if(world.gameState == 1) {	
 	    	batch.draw(runStateImg, 0, 0);
 	    	batch.draw(tankImg1, posPlayer1.x, posPlayer1.y);
@@ -85,8 +93,11 @@ public class WorldRenderer {
 	    	batch.draw(boxImg,posBox1.x,posBox1.y);
 	    	batch.draw(boxImg,posBox2.x,posBox2.y);
 	    	batch.draw(heartImg,posHeart.x,posHeart.y);
-	    	batch.draw(doubleBulletImg,posDouble.x,posDouble.y);
-	    	font.draw(batch, "score " , 620, 70);
+	    	batch.draw(fastBulletImg,posDouble.x,posDouble.y);
+	    	batch.draw(lifeImg,posLife1.x,posLife1.y);
+	    	batch.draw(lifeImg,posLife2.x,posLife2.y);
+	    	font.draw(batch, "X" + world.lifePlayer1 , 950, 50);
+	    	font.draw(batch, "X" + world.lifePlayer2 , 80, 1000);
 	     
 	    	shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
 	    	shapeRenderer.rect(heart.getRectangle().x , heart.getRectangle().y,heart.getRectangle().width,heart.getRectangle().height);

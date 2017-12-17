@@ -19,7 +19,6 @@ public class Fastbullet {
 		position.y = 512;
 	}
 	
-	
 	public Fastbullet() {
 		position = new Vector2(x,y);
 		ranPos();
