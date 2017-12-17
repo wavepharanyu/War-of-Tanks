@@ -146,6 +146,8 @@ public class World {
 			bullet2.getPosition().set(player1.getPosition().x,1100);
 			heart.updateRecPos();	
 			bullet2.updateRecPos();
+			if(lifePlayer1 < 3)
+				lifePlayer1 += 1;
 			heartIsRemove = true;
 			bullet2IsRemove = true;
 		}
@@ -190,6 +192,8 @@ public class World {
 		if(heartTimes % 300 == 0 ) {
 			heart.ranPos();
 		 	heart.updateRecPos();	
+		 	if(lifePlayer2 < 3)
+				lifePlayer2 += 1;
 		 	heartIsRemove = false;
 		 	heartTimes = 0;
 		 }

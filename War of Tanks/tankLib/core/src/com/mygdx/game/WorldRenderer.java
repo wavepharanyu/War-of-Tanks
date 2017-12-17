@@ -12,11 +12,12 @@ public class WorldRenderer {
 	WorldRenderer worldrenderer;
 	private TankGame tankGame;
 	private World world;
+	public Texture runState;
+	public Texture instructState;
 	public Texture tankImg1;
 	public Texture tankImg2;
 	public Texture bulletImg1;
 	public Texture bulletImg2;
-	public Texture background;
 	public Texture boxImg;
 	public Texture heartImg;
 	public Texture doubleBulletImg;
@@ -33,13 +34,14 @@ public class WorldRenderer {
 	public WorldRenderer(TankGame tankGame,World world) {
 		this.tankGame = tankGame;
 		this.world = world;
+        runState = new Texture("background.jpg");
+        instructState = new Texture("instruction.png");
 		tankImg1 = new Texture("player1.png");
         tankImg2 = new Texture("player2.png");
         bulletImg1 = new Texture("rocket.png");
         bulletImg2 = new Texture("rocket2.png");
         boxImg = new Texture("box.png");
         heartImg = new Texture("heart.png");
-        background = new Texture("background.jpg");
         doubleBulletImg = new Texture("fastbullet.png");
         font = new BitmapFont();
     	font.getData().setScale(3);
@@ -51,6 +53,10 @@ public class WorldRenderer {
 	    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	    ShapeRenderer shapeRenderer = tankGame.shapeRenderer;
 		batch.begin();
+		if(world.gameState == 0) {
+			batch.draw(instructState, 0, 0);
+		}
+			
 		player1 = world.getPlayer1();
 	    player2 = world.getPlayer2();
 	    box1 = world.getBox1();
@@ -59,7 +65,7 @@ public class WorldRenderer {
 	    doubleBullet = world.getFastbullet();
 	    bullet1 = world.getBullet1();
 	    bullet2 = world.getBullet2();
-		batch.draw(background, 0, 0);
+		batch.draw(runState, 0, 0);
 		Vector2 posPlayer1 = player1.getPosition();
 		Vector2 posPlayer2 = player2.getPosition();
 		Vector2 posBullet1 = bullet1.getPosition();
