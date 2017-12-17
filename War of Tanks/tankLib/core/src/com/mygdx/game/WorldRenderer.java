@@ -40,7 +40,7 @@ public class WorldRenderer {
         boxImg = new Texture("box.png");
         heartImg = new Texture("heart.png");
         background = new Texture("background.jpg");
-        doubleBulletImg = new Texture("doublebullet.png");
+        doubleBulletImg = new Texture("fastbullet.png");
         font = new BitmapFont();
     	font.getData().setScale(3);
 	}

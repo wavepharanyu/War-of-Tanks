@@ -1,13 +1,11 @@
 package com.mygdx.game;
 
-import java.util.List;
 import java.util.Random;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
-import com.badlogic.gdx.math.Vector2;
+
 
 public class World {
 	private WorldRenderer worldrenderer;
@@ -24,12 +22,15 @@ public class World {
 	public Bullet1 bullet2;
 	private boolean bullet1IsRemove = true;
 	private boolean bullet2IsRemove = true;
-	private boolean heartIsRemove = false;
-	private boolean doubleBulletIsRemove = false;
+	public boolean heartIsRemove = false;
+	public boolean doubleBulletIsRemove = false;
 	public Texture bulletImg1;
 	public Texture bulletImg2;
 	private Random ranX = new Random();
 	private Random ranY = new Random();
+	public int lifePlayer1 = 3;
+	public int lifePlayer2 = 3;
+	public int gameState = 0;
 	
 	World(TankGame tankGame){
 		this.setTankGame(tankGame);
@@ -115,6 +116,12 @@ public class World {
 			bullet1IsRemove = true;
 		 }
 		
+		if(Intersector.overlaps(bullet1.getRectangle(),player2.getRectangle())) {	
+			bullet1.getPosition().set(player1.getPosition().x,-100);
+			bullet1.updateRecPos();
+			bullet1IsRemove = true;
+			lifePlayer2 -= 1;
+		 }
 	}
 	
 	public void updateBullet2(float delta) {
@@ -157,6 +164,13 @@ public class World {
 			bullet2.updateRecPos();
 			bullet2IsRemove = true;
 		 }
+		
+		if(Intersector.overlaps(bullet2.getRectangle(),player1.getRectangle())) {	
+			bullet2.getPosition().set(player2.getPosition().x,1100);
+			bullet2.updateRecPos();
+			bullet2IsRemove = true;
+			lifePlayer1 -= 1;
+		 }
 	}
 	public void update(float delta) {	
 		heartTimes += 1;
@@ -185,6 +199,10 @@ public class World {
 			doubleBulletIsRemove = false;
 			fastbullTimes = 0;
 		 }
+		if(lifePlayer1 == 0)
+			System.out.println("2 Win");
+		if(lifePlayer2 == 0)
+			System.out.println("1 Win");
 	}
 	public TankGame getTankGame() {
 		return tankGame;

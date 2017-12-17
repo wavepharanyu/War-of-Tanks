@@ -23,8 +23,8 @@ public class Fastbullet {
 	public Fastbullet() {
 		position = new Vector2(x,y);
 		ranPos();
-		width = 100;
-        height = 75;
+		width = 64;
+        height = 64;
 		rectangle = new Rectangle(position.x,position.y,width,height);
 	}
 	
