@@ -67,8 +67,18 @@ public class GameScreen extends ScreenAdapter {
 		}
 	}
 	public void update(float delta) {
-		updatePlayer1(delta);
-		updatePlayer2(delta);
+			updatePlayer1(delta);
+			updatePlayer2(delta);	
+		if(Gdx.input.isKeyPressed(Keys.SPACE)) {
+			if(world.gameState == 0) {
+				world.gameState = 1;
+			}
+			
+			/*if(world.gameState == 2 || world.gameState == 3) {
+				world.gameState = 1;
+				world.resetStage();	
+			}*/
+		}
 	}
 	 
 	 public TankGame getTankGame() {

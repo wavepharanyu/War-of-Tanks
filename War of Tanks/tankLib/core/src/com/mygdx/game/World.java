@@ -7,8 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
 
 
-public class World {
-	private WorldRenderer worldrenderer;
+public class World {;
 	public Player1 player1;
 	public Player2 player2;
 	private Box box1;
@@ -18,8 +17,8 @@ public class World {
 	private TankGame tankGame;
 	private int heartTimes = 0;
 	private int fastbullTimes = 0;
-	public Bullet1 bullet1;
-	public Bullet1 bullet2;
+	public Bullet bullet1;
+	public Bullet bullet2;
 	private boolean bullet1IsRemove = true;
 	private boolean bullet2IsRemove = true;
 	public boolean heartIsRemove = false;
@@ -33,16 +32,32 @@ public class World {
 	public int gameState = 0;
 	
 	World(TankGame tankGame){
-		this.setTankGame(tankGame);
+		this.tankGame = tankGame;
 		player1 = new Player1(512,100);
 		player2 = new Player2(512,850);
-		bullet1 = new Bullet1(512,-100);
-		bullet2 = new Bullet1(512,1100);
+		bullet1 = new Bullet(512,-100);
+		bullet2 = new Bullet(512,1100);
 		box1 = new Box(ranX.nextInt(650)+100,ranY.nextInt(215)+210);
 		box2 = new Box(ranX.nextInt(650)+100,ranY.nextInt(145)+590);
 		heart = new Heart();
 		fastBullet = new Fastbullet();
 	}
+	
+	public void resetStage() {
+		player1 = new Player1(512,100);
+		player2 = new Player2(512,850);
+		bullet1 = new Bullet(512,-100);
+		bullet2 = new Bullet(512,1100);
+		box1 = new Box(ranX.nextInt(650)+100,ranY.nextInt(215)+210);
+		box2 = new Box(ranX.nextInt(650)+100,ranY.nextInt(145)+590);
+		heart = new Heart();
+		fastBullet = new Fastbullet();
+		lifePlayer1 = 3;
+		lifePlayer2 = 3;
+		bullet1.SPEED = 10;
+		bullet2.SPEED = 10;
+	}
+	
 	Player1 getPlayer1() {
 		return player1;
 	}
@@ -51,11 +66,11 @@ public class World {
 		return player2;
 	}
 	
-	Bullet1 getBullet1() {
+	Bullet getBullet1() {
 		return bullet1;
 	}
 		
-	Bullet1 getBullet2() {
+	Bullet getBullet2() {
 		return bullet2;
 	}
 	
@@ -97,6 +112,8 @@ public class World {
 			bullet1.getPosition().set(player1.getPosition().x,-100);
 			heart.updateRecPos();	
 			bullet1.updateRecPos();
+			if(lifePlayer1 < 3)
+				lifePlayer1 += 1;
 			heartIsRemove = true;
 			bullet1IsRemove = true;
 		}
@@ -106,6 +123,7 @@ public class World {
 			bullet1.getPosition().set(player1.getPosition().x,-100);
 			fastBullet.updateRecPos();
 			bullet1.updateRecPos();
+			bullet1.SPEED += 5;
 			doubleBulletIsRemove = true;
 			bullet1IsRemove = true;
 		 }
@@ -146,8 +164,8 @@ public class World {
 			bullet2.getPosition().set(player1.getPosition().x,1100);
 			heart.updateRecPos();	
 			bullet2.updateRecPos();
-			if(lifePlayer1 < 3)
-				lifePlayer1 += 1;
+			if(lifePlayer2 < 3)
+				lifePlayer2 += 1;
 			heartIsRemove = true;
 			bullet2IsRemove = true;
 		}
@@ -157,6 +175,7 @@ public class World {
 			bullet2.getPosition().set(player1.getPosition().x,1100);
 			fastBullet.updateRecPos();
 			bullet2.updateRecPos();
+			bullet2.SPEED += 5;
 			doubleBulletIsRemove = true;
 			bullet2IsRemove = true;
 		 }
@@ -179,6 +198,7 @@ public class World {
 		fastbullTimes += 1;
 		updateBullet1(delta);
 		updateBullet2(delta);
+		
 
 		if(Intersector.overlaps(bullet1.getRectangle(),bullet2.getRectangle())) {
 			bullet1.getPosition().set(player1.getPosition().x,-100);
@@ -192,8 +212,6 @@ public class World {
 		if(heartTimes % 300 == 0 ) {
 			heart.ranPos();
 		 	heart.updateRecPos();	
-		 	if(lifePlayer2 < 3)
-				lifePlayer2 += 1;
 		 	heartIsRemove = false;
 		 	heartTimes = 0;
 		 }
@@ -204,14 +222,8 @@ public class World {
 			fastbullTimes = 0;
 		 }
 		if(lifePlayer1 == 0)
-			System.out.println("2 Win");
+			gameState = 3;
 		if(lifePlayer2 == 0)
-			System.out.println("1 Win");
-	}
-	public TankGame getTankGame() {
-		return tankGame;
-		}
-	public void setTankGame(TankGame tankGame) {
-		this.tankGame = tankGame;
+			gameState = 2;
 	}
 }

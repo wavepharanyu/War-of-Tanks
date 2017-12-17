@@ -12,8 +12,10 @@ public class WorldRenderer {
 	WorldRenderer worldrenderer;
 	private TankGame tankGame;
 	private World world;
-	public Texture runState;
-	public Texture instructState;
+	public Texture runStateImg;
+	public Texture instructStateImg;
+	public Texture win1StateImg;
+	public Texture win2StateImg;
 	public Texture tankImg1;
 	public Texture tankImg2;
 	public Texture bulletImg1;
@@ -23,8 +25,8 @@ public class WorldRenderer {
 	public Texture doubleBulletImg;
 	private Player1 player1;
 	private Player2 player2;
-	private Bullet1 bullet1;
-	private Bullet1 bullet2;
+	private Bullet bullet1;
+	private Bullet bullet2;
 	private Box box1;
 	private Box box2;
 	private Heart heart;
@@ -34,8 +36,10 @@ public class WorldRenderer {
 	public WorldRenderer(TankGame tankGame,World world) {
 		this.tankGame = tankGame;
 		this.world = world;
-        runState = new Texture("background.jpg");
-        instructState = new Texture("instruction.png");
+        runStateImg = new Texture("background.jpg");
+        instructStateImg = new Texture("instruction.png");
+        win1StateImg = new Texture("player1win.png");
+        win2StateImg = new Texture("player2win.png");
 		tankImg1 = new Texture("player1.png");
         tankImg2 = new Texture("player2.png");
         bulletImg1 = new Texture("rocket.png");
@@ -54,9 +58,8 @@ public class WorldRenderer {
 	    ShapeRenderer shapeRenderer = tankGame.shapeRenderer;
 		batch.begin();
 		if(world.gameState == 0) {
-			batch.draw(instructState, 0, 0);
+			batch.draw(instructStateImg, 0, 0);
 		}
-			
 		player1 = world.getPlayer1();
 	    player2 = world.getPlayer2();
 	    box1 = world.getBox1();
@@ -65,7 +68,6 @@ public class WorldRenderer {
 	    doubleBullet = world.getFastbullet();
 	    bullet1 = world.getBullet1();
 	    bullet2 = world.getBullet2();
-		batch.draw(runState, 0, 0);
 		Vector2 posPlayer1 = player1.getPosition();
 		Vector2 posPlayer2 = player2.getPosition();
 		Vector2 posBullet1 = bullet1.getPosition();
@@ -74,25 +76,35 @@ public class WorldRenderer {
 	    Vector2 posBox2 = box2.getPosition();
 	    Vector2 posHeart = heart.getPosition();
 	    Vector2 posDouble = doubleBullet.getPosition();
-	    batch.draw(tankImg1, posPlayer1.x, posPlayer1.y);
-		batch.draw(tankImg2, posPlayer2.x, posPlayer2.y);
-		batch.draw(bulletImg1,posBullet1.x,posBullet1.y);
-		batch.draw(bulletImg2,posBullet2.x,posBullet2.y);
-	    batch.draw(boxImg,posBox1.x,posBox1.y);
-	    batch.draw(boxImg,posBox2.x,posBox2.y);
-	    batch.draw(heartImg,posHeart.x,posHeart.y);
-	    batch.draw(doubleBulletImg,posDouble.x,posDouble.y);
-	    font.draw(batch, "score " , 620, 70);
+	    if(world.gameState == 1) {	
+	    	batch.draw(runStateImg, 0, 0);
+	    	batch.draw(tankImg1, posPlayer1.x, posPlayer1.y);
+	    	batch.draw(tankImg2, posPlayer2.x, posPlayer2.y);
+	    	batch.draw(bulletImg1,posBullet1.x,posBullet1.y);
+	    	batch.draw(bulletImg2,posBullet2.x,posBullet2.y);
+	    	batch.draw(boxImg,posBox1.x,posBox1.y);
+	    	batch.draw(boxImg,posBox2.x,posBox2.y);
+	    	batch.draw(heartImg,posHeart.x,posHeart.y);
+	    	batch.draw(doubleBulletImg,posDouble.x,posDouble.y);
+	    	font.draw(batch, "score " , 620, 70);
 	     
-	    shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-	    shapeRenderer.rect(heart.getRectangle().x , heart.getRectangle().y,heart.getRectangle().width,heart.getRectangle().height);
-	    shapeRenderer.rect(box1.getRectangle().x , box1.getRectangle().y,box1.getRectangle().width,box1.getRectangle().height);
-	    shapeRenderer.rect(box2.getRectangle().x , box2.getRectangle().y,box2.getRectangle().width,box2.getRectangle().height);
-	    shapeRenderer.rect(player2.getRectangle().x , player2.getRectangle().y,player2.getRectangle().width,player2.getRectangle().height);
-	    shapeRenderer.rect(player1.getRectangle().x , player1.getRectangle().y,player1.getRectangle().width,player1.getRectangle().height);
-	    shapeRenderer.rect(doubleBullet.getRectangle().x , doubleBullet.getRectangle().y,doubleBullet.getRectangle().width,doubleBullet.getRectangle().height);
-	    shapeRenderer.rect(bullet1.getRectangle().x , bullet1.getRectangle().y,bullet1.getRectangle().width,bullet1.getRectangle().height);
-	    shapeRenderer.rect(bullet2.getRectangle().x , bullet2.getRectangle().y,bullet2.getRectangle().width,bullet2.getRectangle().height);
+	    	shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+	    	shapeRenderer.rect(heart.getRectangle().x , heart.getRectangle().y,heart.getRectangle().width,heart.getRectangle().height);
+	    	shapeRenderer.rect(box1.getRectangle().x , box1.getRectangle().y,box1.getRectangle().width,box1.getRectangle().height);
+	    	shapeRenderer.rect(box2.getRectangle().x , box2.getRectangle().y,box2.getRectangle().width,box2.getRectangle().height);
+	    	shapeRenderer.rect(player2.getRectangle().x , player2.getRectangle().y,player2.getRectangle().width,player2.getRectangle().height);
+	    	shapeRenderer.rect(player1.getRectangle().x , player1.getRectangle().y,player1.getRectangle().width,player1.getRectangle().height);
+	    	shapeRenderer.rect(doubleBullet.getRectangle().x , doubleBullet.getRectangle().y,doubleBullet.getRectangle().width,doubleBullet.getRectangle().height);
+	    	shapeRenderer.rect(bullet1.getRectangle().x , bullet1.getRectangle().y,bullet1.getRectangle().width,bullet1.getRectangle().height);
+	    	shapeRenderer.rect(bullet2.getRectangle().x , bullet2.getRectangle().y,bullet2.getRectangle().width,bullet2.getRectangle().height);
+	    }
+	    if(world.gameState == 2) {
+	    	batch.draw(win1StateImg, 0, 0);
+	    }
+	    
+	    if(world.gameState == 3) {
+	    	batch.draw(win2StateImg, 0, 0);
+	    }
 	    batch.end();
 	    shapeRenderer.end();
 		
