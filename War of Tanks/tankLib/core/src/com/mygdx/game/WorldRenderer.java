@@ -66,6 +66,7 @@ public class WorldRenderer {
 		Vector2 posPlayer1 = player1.getPosition();
 		Vector2 posPlayer2 = player2.getPosition();
 		Vector2 posBullet1 = bullet1.getPosition();
+		Vector2 posBullet2 = bullet2.getPosition();
 	    Vector2 posBox1 = box1.getPosition();
 	    Vector2 posBox2 = box2.getPosition();
 	    Vector2 posHeart = heart.getPosition();
@@ -73,6 +74,7 @@ public class WorldRenderer {
 	    batch.draw(tankImg1, posPlayer1.x, posPlayer1.y);
 		batch.draw(tankImg2, posPlayer2.x, posPlayer2.y);
 		batch.draw(bulletImg1,posBullet1.x,posBullet1.y);
+		batch.draw(bulletImg2,posBullet2.x,posBullet2.y);
 	    batch.draw(boxImg,posBox1.x,posBox1.y);
 	    batch.draw(boxImg,posBox2.x,posBox2.y);
 	    batch.draw(heartImg,posHeart.x,posHeart.y);

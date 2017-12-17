@@ -18,12 +18,12 @@ public class GameScreen extends ScreenAdapter {
 	private TankGame tankGame;
     WorldRenderer worldRenderer;
    // private SpriteBatch batch;
-    private Player1 player1;
-	private Player2 player2;
+    public Player1 player1;
+	public Player2 player2;
 	private World world;
 	
 	public GameScreen(TankGame tankGame) {
-        this.tankGame = tankGame;
+		this.setTankGame(tankGame);
         world = new World(tankGame);
         worldRenderer = new WorldRenderer(tankGame, world);
         player1 = world.getPlayer1();
@@ -35,13 +35,43 @@ public class GameScreen extends ScreenAdapter {
 		 Gdx.gl.glClearColor(0, 0, 0, 1);
 	     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		 update(delta);
-		 worldRenderer.render(delta);
+	     worldRenderer.render(delta);
 		 world.update(delta);
-		
 	 }
 	 
+	public void updatePlayer1(float delta) {
+		 if(Gdx.input.isKeyPressed(Keys.A)) {
+			 player1.move(player1.DIRECTION_LEFT);
+		 }
+		 if(Gdx.input.isKeyPressed(Keys.D)) {
+			 player1.move(player1.DIRECTION_RIGHT);
+		 }
+		 if(Gdx.input.isKeyPressed(Keys.W)) {
+			 player1.move(player1.DIRECTION_UP);
+		 }
+		 if(Gdx.input.isKeyPressed(Keys.S)) {
+			 player1.move(player1.DIRECTION_DOWN);
+		 }
+	}
+	
+	public void updatePlayer2(float delta) {
+		 if(Gdx.input.isKeyPressed(Keys.LEFT)) {
+			 player2.move(player2.DIRECTION_LEFT);
+		 }
+		 if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
+			 player2.move(player2.DIRECTION_RIGHT);
+		 }
+		 if(Gdx.input.isKeyPressed(Keys.UP)) {
+			 player2.move(player2.DIRECTION_UP);
+		 }
+		 if(Gdx.input.isKeyPressed(Keys.DOWN)) {
+			 player2.move(player2.DIRECTION_DOWN);
+		 }
+	}
 	public void update(float delta) {
-		 Vector2 pos_player1 = player1.getPosition();
+		updatePlayer1(delta);
+		updatePlayer2(delta);
+		 /*Vector2 pos_player1 = player1.getPosition();
 		 if (pos_player1.x >= 0 && pos_player1.x <= 1024) {
 			 if(Gdx.input.isKeyPressed(Keys.A)) {
 				 player1.move(player1.DIRECTION_LEFT);
@@ -67,13 +97,13 @@ public class GameScreen extends ScreenAdapter {
 			 if(Gdx.input.isKeyPressed(Keys.DOWN)) {
 				 player2.move(player2.DIRECTION_DOWN);
 			 }
-		 }
+		 }*/
 	}
 	 
 	 public TankGame getTankGame() {
 		return tankGame;
 		}
-	 public void setGoawayGame(TankGame tankGame) {
+	 public void setTankGame(TankGame tankGame) {
 		this.tankGame = tankGame; 
 	 }
 }

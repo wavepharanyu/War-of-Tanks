@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Vector2;
 
 public class World {
 	private WorldRenderer worldrenderer;
@@ -27,7 +28,7 @@ public class World {
 	public Texture bulletImg2;
 	
 	World(TankGame tankGame){
-		this.tankGame = tankGame;
+		this.setTankGame(tankGame);
 		player1 = new Player1(512,100);
 		player2 = new Player2(512,850);
 		bullet1 = new Bullet1(512,-100);
@@ -71,9 +72,8 @@ public class World {
 		return doubleBullet;
 	}
 	
-	public void update(float delta) {	
-		 times += 1;
-		 if (bullet1IsRemove == true) {
+	public void updateBullet1(float delta) {
+		if (bullet1IsRemove == true) {
 			if(Gdx.input.isKeyJustPressed(Keys.F)) {
 				bullet1.getPosition().set(512,100);
 				bullet1IsRemove = false;
@@ -88,6 +88,28 @@ public class World {
 			bullet1.getPosition().set(512,-100);
 			bullet1IsRemove = true;
 		}
+	}
+	
+	public void updateBullet2(float delta) {
+		if (bullet2IsRemove == true) {
+			if(Gdx.input.isKeyJustPressed(Keys.L)) {
+				bullet2.getPosition().set(512,850);
+				bullet2IsRemove = false;
+				}
+			}
+			
+		if(bullet2.getPosition().y <= 850) {
+			bullet2.move();
+		}
+			 
+		if(bullet2.getPosition().y < 0) {
+			bullet2.getPosition().set(512,-1100);
+			bullet2IsRemove = true;
+		}
+	}
+	public void update(float delta) {	
+		 times += 1;
+		updateBullet1(delta);
 		if(Intersector.overlaps(player1.getRectangle(),heart.getRectangle())) {
 			heart.getPosition().set(1024,1024);	 
 			heartIsRemove = true;
@@ -110,7 +132,7 @@ public class World {
 	public TankGame getTankGame() {
 		return tankGame;
 		}
-	public void setGoawayGame(TankGame tankGame) {
+	public void setTankGame(TankGame tankGame) {
 		this.tankGame = tankGame;
 	}
 }
