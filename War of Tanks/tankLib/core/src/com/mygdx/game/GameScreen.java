@@ -20,7 +20,7 @@ public class GameScreen extends ScreenAdapter {
    // private SpriteBatch batch;
     public Player1 player1;
 	public Player2 player2;
-	private World world;
+	World world;
 	
 	public GameScreen(TankGame tankGame) {
 		this.setTankGame(tankGame);
@@ -40,64 +40,35 @@ public class GameScreen extends ScreenAdapter {
 	 }
 	 
 	public void updatePlayer1(float delta) {
-		 if(Gdx.input.isKeyPressed(Keys.A)) {
-			 player1.move(player1.DIRECTION_LEFT);
-		 }
-		 if(Gdx.input.isKeyPressed(Keys.D)) {
-			 player1.move(player1.DIRECTION_RIGHT);
-		 }
-		 if(Gdx.input.isKeyPressed(Keys.W)) {
-			 player1.move(player1.DIRECTION_UP);
-		 }
-		 if(Gdx.input.isKeyPressed(Keys.S)) {
-			 player1.move(player1.DIRECTION_DOWN);
-		 }
+		Vector2 posPlayer1 = player1.getPosition();
+		if(posPlayer1.x >=0) {
+			if(Gdx.input.isKeyPressed(Keys.A)) {
+				player1.move(player1.DIRECTION_LEFT);
+			}
+		}
+		if (posPlayer1.x <= 960) { 
+			if(Gdx.input.isKeyPressed(Keys.D)) {
+				player1.move(player1.DIRECTION_RIGHT);
+			}
+		}
 	}
 	
 	public void updatePlayer2(float delta) {
-		 if(Gdx.input.isKeyPressed(Keys.LEFT)) {
-			 player2.move(player2.DIRECTION_LEFT);
-		 }
-		 if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
-			 player2.move(player2.DIRECTION_RIGHT);
-		 }
-		 if(Gdx.input.isKeyPressed(Keys.UP)) {
-			 player2.move(player2.DIRECTION_UP);
-		 }
-		 if(Gdx.input.isKeyPressed(Keys.DOWN)) {
-			 player2.move(player2.DIRECTION_DOWN);
-		 }
+		Vector2 posPlayer2 = player2.getPosition();
+		if(posPlayer2.x >=0) {
+			if(Gdx.input.isKeyPressed(Keys.LEFT)) {
+				player2.move(player2.DIRECTION_LEFT);
+			}
+		}
+		if(posPlayer2.x <=960) {
+			if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
+				player2.move(player2.DIRECTION_RIGHT);
+			}
+		}
 	}
 	public void update(float delta) {
 		updatePlayer1(delta);
 		updatePlayer2(delta);
-		 /*Vector2 pos_player1 = player1.getPosition();
-		 if (pos_player1.x >= 0 && pos_player1.x <= 1024) {
-			 if(Gdx.input.isKeyPressed(Keys.A)) {
-				 player1.move(player1.DIRECTION_LEFT);
-			 }
-			 if(Gdx.input.isKeyPressed(Keys.D)) {
-				 player1.move(player1.DIRECTION_RIGHT);
-			 }
-			 if(Gdx.input.isKeyPressed(Keys.W)) {
-				 player1.move(player1.DIRECTION_UP);
-			 }
-			 if(Gdx.input.isKeyPressed(Keys.S)) {
-				 player1.move(player1.DIRECTION_DOWN);
-			 }
-			 if(Gdx.input.isKeyPressed(Keys.LEFT)) {
-				 player2.move(player2.DIRECTION_LEFT);
-			 }
-			 if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
-				 player2.move(player2.DIRECTION_RIGHT);
-			 }
-			 if(Gdx.input.isKeyPressed(Keys.UP)) {
-				 player2.move(player2.DIRECTION_UP);
-			 }
-			 if(Gdx.input.isKeyPressed(Keys.DOWN)) {
-				 player2.move(player2.DIRECTION_DOWN);
-			 }
-		 }*/
 	}
 	 
 	 public TankGame getTankGame() {

@@ -1,11 +1,9 @@
 package com.mygdx.game;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -24,15 +22,13 @@ public class WorldRenderer {
 	public Texture doubleBulletImg;
 	private Player1 player1;
 	private Player2 player2;
-	private int x;
-	private int y;
 	private Bullet1 bullet1;
-	private Bullet2 bullet2;
+	private Bullet1 bullet2;
 	private Box box1;
 	private Box2 box2;
 	private Heart heart;
-	private Doublebullet doubleBullet;
-	private int times = 0;
+	private Fastbullet doubleBullet;
+	private BitmapFont font;
 	
 	public WorldRenderer(TankGame tankGame,World world) {
 		this.tankGame = tankGame;
@@ -45,15 +41,8 @@ public class WorldRenderer {
         heartImg = new Texture("heart.png");
         background = new Texture("background.jpg");
         doubleBulletImg = new Texture("doublebullet.png");
-        world = new World(tankGame);
-	    player1 = world.getPlayer1();
-	    player2 = world.getPlayer2();
-	    box1 = world.getBox1();
-	    box2 = world.getBox2();
-	    heart = world.getHeart();
-	    doubleBullet = world.getDoublebullet();
-	    bullet1 = world.getBullet1();
-	    bullet2 = world.getBullet2();
+        font = new BitmapFont();
+    	font.getData().setScale(3);
 	}
 	
 	public void render (float delta) {
@@ -62,6 +51,14 @@ public class WorldRenderer {
 	    Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	    ShapeRenderer shapeRenderer = tankGame.shapeRenderer;
 		batch.begin();
+		player1 = world.getPlayer1();
+	    player2 = world.getPlayer2();
+	    box1 = world.getBox1();
+	    box2 = world.getBox2();
+	    heart = world.getHeart();
+	    doubleBullet = world.getFastbullet();
+	    bullet1 = world.getBullet1();
+	    bullet2 = world.getBullet2();
 		batch.draw(background, 0, 0);
 		Vector2 posPlayer1 = player1.getPosition();
 		Vector2 posPlayer2 = player2.getPosition();
@@ -78,7 +75,8 @@ public class WorldRenderer {
 	    batch.draw(boxImg,posBox1.x,posBox1.y);
 	    batch.draw(boxImg,posBox2.x,posBox2.y);
 	    batch.draw(heartImg,posHeart.x,posHeart.y);
-	    batch.draw(doubleBulletImg,posDouble.x,posDouble.y); 
+	    batch.draw(doubleBulletImg,posDouble.x,posDouble.y);
+	    font.draw(batch, "score " , 620, 70);
 	     
 	    shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
 	    shapeRenderer.rect(heart.getRectangle().x , heart.getRectangle().y,heart.getRectangle().width,heart.getRectangle().height);
@@ -87,7 +85,8 @@ public class WorldRenderer {
 	    shapeRenderer.rect(player2.getRectangle().x , player2.getRectangle().y,player2.getRectangle().width,player2.getRectangle().height);
 	    shapeRenderer.rect(player1.getRectangle().x , player1.getRectangle().y,player1.getRectangle().width,player1.getRectangle().height);
 	    shapeRenderer.rect(doubleBullet.getRectangle().x , doubleBullet.getRectangle().y,doubleBullet.getRectangle().width,doubleBullet.getRectangle().height);
-	    //shapeRenderer.rect(bullet1.getRectangle().x , bullet1.getRectangle().y,bullet1.getRectangle().width,bullet1.getRectangle().height);
+	    shapeRenderer.rect(bullet1.getRectangle().x , bullet1.getRectangle().y,bullet1.getRectangle().width,bullet1.getRectangle().height);
+	    shapeRenderer.rect(bullet2.getRectangle().x , bullet2.getRectangle().y,bullet2.getRectangle().width,bullet2.getRectangle().height);
 	    batch.end();
 	    shapeRenderer.end();
 		

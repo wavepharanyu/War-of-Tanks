@@ -24,8 +24,15 @@ public class Bullet1 {
 	    return rectangle;
 	}
 	
-	public void move() {
+	public void moveUp() {
 		position.y += SPEED;
+		rectangle.setPosition(position.x,position.y);
+	}
+	public void moveDown() {
+		position.y -= SPEED;
+		rectangle.setPosition(position.x,position.y);
+	}
+	public void updateRecPos() {
 		rectangle.setPosition(position.x,position.y);
 	}
 }

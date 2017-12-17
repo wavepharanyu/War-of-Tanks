@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Player1 {
 	private Vector2 position;
-	private static final int [][] DIR_OFFSETS = new int [][] {
+	public static final int [][] DIR_OFFSETS = new int [][] {
 	        {0,0},
 	        {0,-1},
 	        {1,0},

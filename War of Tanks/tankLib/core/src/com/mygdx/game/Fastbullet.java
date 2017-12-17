@@ -5,7 +5,7 @@ import java.util.Random;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class Doublebullet {
+public class Fastbullet {
 	private Vector2 position;
 	private Random ranX = new Random();
 	public int x;
@@ -20,7 +20,7 @@ public class Doublebullet {
 	}
 	
 	
-	public Doublebullet() {
+	public Fastbullet() {
 		position = new Vector2(x,y);
 		ranPos();
 		width = 100;
