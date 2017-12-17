@@ -35,5 +35,9 @@ public class Heart {
 	public Rectangle getRectangle() {
 	    return rectangle;
 	}
+	
+	public void updateRecPos() {
+		rectangle.setPosition(position.x,position.y);
+	}
 }
 

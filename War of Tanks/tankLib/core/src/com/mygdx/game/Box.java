@@ -17,7 +17,7 @@ public class Box {
 	
 	public void ranPos() {
 		position.x = ranX.nextInt(650)+100;
-		position.y = ranY.nextInt(269)+210;
+		position.y = ranY.nextInt(215)+210;
 	}
 	
 	public Box() {
