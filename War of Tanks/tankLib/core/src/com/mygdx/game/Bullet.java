@@ -8,7 +8,7 @@ public class Bullet {
 	private Rectangle rectangle;
 	public int width;
     public int height;
-    public int SPEED = 10;
+    public int SPEED = 15;
 	
 	public Bullet(int x, int y) {
 		position = new Vector2(x,y);
