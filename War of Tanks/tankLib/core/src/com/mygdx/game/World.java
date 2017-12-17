@@ -8,13 +8,13 @@ import com.badlogic.gdx.math.Intersector;
 
 
 public class World {;
-	public Player1 player1;
-	public Player2 player2;
+	public Player player1;
+	public Player player2;
 	private Box box1;
 	private Box box2;
 	private Heart heart;
 	private Fastbullet fastBullet;
-	private TankGame tankGame;
+	public TankGame tankGame;
 	private int heartTimes = 0;
 	private int fastbullTimes = 0;
 	public Bullet bullet1;
@@ -35,8 +35,8 @@ public class World {;
 	
 	World(TankGame tankGame){
 		this.tankGame = tankGame;
-		player1 = new Player1(512,100);
-		player2 = new Player2(512,850);
+		player1 = new Player(512,100);
+		player2 = new Player(512,850);
 		bullet1 = new Bullet(512,-100);
 		bullet2 = new Bullet(512,1100);
 		box1 = new Box(ranX.nextInt(650)+100,ranY.nextInt(215)+210);
@@ -47,11 +47,11 @@ public class World {;
 		fastBullet = new Fastbullet();
 	}
 	
-	Player1 getPlayer1() {
+	Player getPlayer1() {
 		return player1;
 	}
 	
-	Player2 getPlayer2() {
+	Player getPlayer2() {
 		return player2;
 	}
 	

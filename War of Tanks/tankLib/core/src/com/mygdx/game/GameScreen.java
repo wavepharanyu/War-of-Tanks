@@ -9,8 +9,8 @@ import com.badlogic.gdx.math.Vector2;
 public class GameScreen extends ScreenAdapter {
 	private TankGame tankGame;
     WorldRenderer worldRenderer;
-    public Player1 player1;
-	public Player2 player2;
+    public Player player1;
+	public Player player2;
 	World world;
 	
 	public GameScreen(TankGame tankGame) {

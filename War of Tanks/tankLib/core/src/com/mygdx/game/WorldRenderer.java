@@ -24,8 +24,8 @@ public class WorldRenderer {
 	public Texture heartImg;
 	public Texture fastBulletImg;
 	public Texture lifeImg;
-	private Player1 player1;
-	private Player2 player2;
+	private Player player1;
+	private Player player2;
 	private Bullet bullet1;
 	private Bullet bullet2;
 	private Box box1;

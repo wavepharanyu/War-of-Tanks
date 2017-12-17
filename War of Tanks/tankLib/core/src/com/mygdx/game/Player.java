@@ -3,7 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class Player1 {
+public class Player {
 	private Vector2 position;
 	public static final int [][] DIR_OFFSETS = new int [][] {
 	        {0,0},
@@ -22,7 +22,7 @@ public class Player1 {
     public int height;
     private Rectangle rectangle;
 	
-	public Player1(int x , int y) {
+	public Player(int x , int y) {
 		position = new Vector2(x,y);
 		 width = 60;
 	     height = 80;
